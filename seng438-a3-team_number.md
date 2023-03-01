@@ -29,7 +29,7 @@ Text…
         -max(double d1, double d2): double
         -getUpperBound(): double
             TC1: Input: range’s lower bound is greater than range’s upper bound
-		    TC2: Input: range’s lower bound is lower than range’s upper bound
+            TC2: Input: range’s lower bound is lower than range’s upper bound
         -scale(Range base, double factor): Range
             TC1: Input: base = null, factor = 1.0
 	        TC2: Input: base = Range(-10,10), factor = -3.0
@@ -56,8 +56,8 @@ Text…
 	        TC5: Input: a = {{1.0, 2.1, 3.4}, {-1.2, 0.0, 10.0}}, b = {{1.0, 2.1, 3.4}, {-1.2, 0.0, 10.0}}
         -clone(double[][] source): double[][]
             TC1: Input: source = null
-		    TC2: Input: source = {{3.0, 5.0, null}, {8.0, 19.0, 4.0}}
-		    TC3: Input: source = {{8.0, 14.0, 17.0}, {25.0, 89.0, 103.0}}
+	    TC2: Input: source = {{3.0, 5.0, null}, {8.0, 19.0, 4.0}}
+	    TC3: Input: source = {{8.0, 14.0, 17.0}, {25.0, 89.0, 103.0}}
         -calculateColumnTotal(Values2D data, int column, int[] validRows): double
             TC1: Input:  data = null, column = 0, validRows = {0}
             TC2: Input:  data = {{3.0}, {null}, {1.0}, {10.0}, {2.0}}, column = 0, validRows = {0, 1, 2}
