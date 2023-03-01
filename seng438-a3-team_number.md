@@ -64,7 +64,52 @@ Disadvantages of Coverage-Based Test Generation
 
 # 8 A discussion on how the team work/effort was divided and managed
 
-Text…
+Section 3.1: Measure Control Flow Coverage
+    -This section was completed as a group
+    
+    
+Section 3.2: Measure Data Flow Coverage Manually
+    -Method DataUtilities.calculateColumnTotal() was done by Jinsu and Jack
+    -Method Range.getLength() was done by Maarya and Hannah
+
+
+Section 3.3: Test Suite Development
+    -Each group member was given 5 methods from Range and DataUtilities
+        -Maarya
+            Range:
+                -constrain(double): double
+                -equals(Object): boolean
+                -toString(): String
+                -max(double d1, double d2): double
+            DataUtilities:
+                -calculateRowTotal(Values2D data, int row, int[] validCols): double
+        
+        -Hannah
+            Range:
+                -getUpperBound(): double
+                -scale(Range base, double factor): Range
+            DataUtilities:
+                -equal(double[][] a, double[][] b): boolean
+                -clone(double[][] source): double[][]
+                -calculateColumnTotal(Values2D data, int column, int[] validRows): double
+        
+        -Jinsu
+            Range:
+                -shiftWithNoZeroCrossing(double, double): double
+                -hashCode(): int
+                -combineIgnoringNaN(Range range1, Range range2): Range
+                -min(double d1, double d2): double
+                -isNaNRange(): boolean
+                
+        
+        -Jack
+            Range:
+                -expand(Range, double, double): Range
+                -expandToInclude(Range, double): Range
+                -shift(Range, double): Range
+                -shift(Range, double, boolean): Range
+                -intersects(Range, range): boolean
+
 
 # 9 Any difficulties encountered, challenges overcome, and lessons learned from performing the lab
 
