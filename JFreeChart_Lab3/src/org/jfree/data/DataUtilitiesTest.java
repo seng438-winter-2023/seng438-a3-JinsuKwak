@@ -42,6 +42,8 @@ public class DataUtilitiesTest {
 	 // -----------------------------------------------------------------------------------------
 	 // Start of Test Code
 	 // -----------------------------------------------------------------------------------------
+     
+     // ------- Start of Lab 2 Test Cases -------
     	
      // ------- Test for calculateColumnTotal(Values2D data, int column) -------
 	 
@@ -1016,9 +1018,216 @@ public class DataUtilitiesTest {
 	     assertEquals("Checking function returns correct cumulative percentages",14.1/14.1, actualResult.getValue(4));
 	 }
 	
-	
-	
 	// ------- End of Test for getCumulativePercentages(KeyedValues): KeyedValues -------
+	
+	// ------- End of Lab 2 Test Cases -------
+	
+	
+	
+	// ------- Start of Added Lab 3 Test Cases -------
+	
+	// ------- Test for equal(double[][]a, double[][]b): boolean -------
+
+	 /*
+	  *  This test will simulate when input argument a is null and b is null
+	  *  Expected result: returns true
+	  */
+	 @Test
+	 public void testEqualNullInputs() {		 
+		 boolean actualResult = DataUtilities.equal(null,  null);
+		 assertEquals("Checking equality between null inputs", true, actualResult);
+	 }
+	 
+	 /*
+	  *  This test will simulate when only the second input is null
+	  *  Expected result: returns false
+	  */
+	 @Test
+	 public void testEqualSecondInputNull() {
+		 double [][] array = {{1.0,-2.0,3.0},{-1.0,2.0,-3.0}};
+		 boolean actualResult = DataUtilities.equal(array,  null);
+		 assertEquals("Checking equality when second input is null", false, actualResult);
+	 }
+	 
+	 /*
+	  *  This test will simulate when the two 2D array inputs have different lengths (rows)
+	  *  Expected result: returns false
+	  */
+	 @Test
+	 public void testEqualDifferentLength2DArrays() {
+		 double [][] firstArray = {{1.0,2.1,3.4},{-1.2,0.0,10.0},{-1.3,1.0,10.0}};
+		 double [][] secondArray = {{1.0,2.1,3.4},{-1.2,0.0,10.0}};
+
+		 boolean actualResult = DataUtilities.equal(firstArray, secondArray);
+		 assertEquals("Checking equality when 2D Array inputs are different lengths", false, actualResult);
+	 }
+	 
+	 /*
+	  *  This test will simulate when the two 2D array inputs are valid but not equal
+	  *  Expected result: returns false
+	  */
+	 @Test
+	 public void testEqualValidNonEqualInputs() {
+		 double [][] firstArray = {{1.0,7.0,3.0},{-1.0,0.0,20.0}};
+		 double [][] secondArray = {{1.0,2.0,3.0},{-1.0,0.0,10.0}};
+		 
+		 boolean actualResult = DataUtilities.equal(firstArray, secondArray);
+		 assertEquals("Checking equality when 2D Array inputs are valid but not equal", false, actualResult);
+	 }
+	 
+	 /*
+	  *  This test will simulate when the two 2D array inputs are valid and equal
+	  *  Expected result: returns true
+	  */
+	 @Test
+	 public void testEqualValidEqualInputs() {
+		 double [][] firstArray = {{1.0,2.1,3.4},{-1.2,0.0,10.0}};
+		 double [][] secondArray = {{1.0,2.1,3.4},{-1.2,0.0,10.0}};
+		 
+		 boolean actualResult = DataUtilities.equal(firstArray, secondArray);
+		 assertEquals("Checking equality when 2D Array inputs are valid and equal", true, actualResult);
+	 }
+	 
+	// ------- End of tests for equal(double[][]a, double[][]b): boolean -------	
+	 
+	// ------- Test for clone(double[][]source): double[][] -------
+	   	
+	 /*
+	  *  This test will simulate when input is null
+	  *  Expected result: Exception thrown
+	  */
+	  @Test(expected = IllegalArgumentException.class) // expecting an exception
+	  public void testCloneNullInput() {
+		  double[][] actualResult = DataUtilities.clone(null);
+	  }
+	  
+	  /*
+	   *  This test will simulate when there is a null value in the input
+	   *  Expected result: returns valid double[][] that is a clone
+	   */
+	  @Test
+	  public void testCloneNullValueInInput() {
+		 double[][] source = {{3.0, 5.0, (Double) null},{8.0,19.0,4.0}};
+		 
+   	     double[][] actualResult = DataUtilities.clone(source);
+		 assertEquals("Checking clone when there is null value in input", 3.0, actualResult[0][0], .000000001d);
+		 assertEquals("Checking clone when there is null value in input", 5.0, actualResult[0][1], .000000001d);
+		 assertEquals("Checking clone when there is null value in input", null, actualResult[0][2]);
+		 assertEquals("Checking clone when there is null value in input", 8.0, actualResult[1][0], .000000001d);
+		 assertEquals("Checking clone when there is null value in input", 19.4, actualResult[1][1], .000000001d);
+		 assertEquals("Checking clone when there is null value in input", 4.0, actualResult[1][2], .000000001d);
+	  }
+	  
+	  /*
+	   *  This test will simulate when the input is all valid values
+	   *  Expected result: returns valid double[][] that is a clone
+	   */
+	  @Test
+	  public void testCloneValidInput() {
+		 double[][] source = {{8.0, 14.0, 17.0},{25.0,89.0,103.0}};
+		 
+   	     double[][] actualResult = DataUtilities.clone(source);
+		 assertEquals("Checking clone when input is valid", 8.0, actualResult[0][0], .000000001d);
+		 assertEquals("Checking clone when input is valid", 14.0, actualResult[0][1], .000000001d);
+		 assertEquals("Checking clone when input is valid", 17.0, actualResult[0][2], .000000001d);
+		 assertEquals("Checking clone when input is valid", 25.0, actualResult[1][0], .000000001d);
+		 assertEquals("Checking clone when input is valid", 89.0, actualResult[1][1], .000000001d);
+		 assertEquals("Checking clone when input is valid", 103.0, actualResult[1][2], .000000001d);
+	  }
+	  
+	 
+	// ------- End of tests for clone(double[][]source): double[][] -------	
+	 
+	// ------- Test for calculateColumnTotal(Values2D data, int column, int[] validRows): double-------
+	  /*
+	   *  This test will simulate when the input argument data is null
+	   *  Expected result: throws an Exception
+	   */
+	  @Test(expected = IllegalArgumentException.class) // expecting an exception
+	  public void testCalculateColumnTotalNullDataInput() {
+		  int[] validRows = {0};
+		  double actualResult = DataUtilities.calculateColumnTotal(null, 0, validRows);
+	  } 
+	  
+	  /*
+	   *  This test will simulate when the input argument data holds a null value
+	   *  Expected result: returns accurate column total
+	   */
+	  @Test(timeout = 1000) // timeout: 1000
+		 public void testCalculateColumnTotalNullValueInInputData() {
+		     Mockery mockingContext = new Mockery();
+		     final Values2D values = mockingContext.mock(Values2D.class);
+		     mockingContext.checking(new Expectations() {
+		         {
+		             one(values).getRowCount();
+		             will(returnValue(5));
+		             
+		             one(values).getValue(0, 1);
+		             will(returnValue(3.0));
+		             
+		             one(values).getValue(1, 1);
+		             will(returnValue(null));
+		             
+		             one(values).getValue(2, 1);
+		             will(returnValue(1.0));
+		             
+		             one(values).getValue(3, 1);
+		             will(returnValue(10.0));
+		             
+		             one(values).getValue(4, 1);
+		             will(returnValue(2.0));
+
+		         }
+		     });
+		     int[] validRows = {0, 1, 2};
+		     double actualResult = DataUtilities.calculateColumnTotal(values, 0, validRows);
+		     double expectedResult = 4.0;
+		     assertEquals("Checking function returns correct column sum",expectedResult, actualResult, .000000001d);
+		 }
+	  
+	  /*
+	   *  This test will simulate when the input argument data is all positive
+	   *  Expected result: returns accurate column total
+	   */
+	  @Test(timeout = 1000) // timeout: 1000
+		 public void testCalculateColumnTotalValidInput() {
+		     Mockery mockingContext = new Mockery();
+		     final Values2D values = mockingContext.mock(Values2D.class);
+		     mockingContext.checking(new Expectations() {
+		         {
+		             one(values).getRowCount();
+		             will(returnValue(5));
+		             
+		             one(values).getValue(0, 1);
+		             will(returnValue(3.0));
+		             
+		             one(values).getValue(1, 1);
+		             will(returnValue(8.0));
+		             
+		             one(values).getValue(2, 1);
+		             will(returnValue(1.0));
+		             
+		             one(values).getValue(3, 1);
+		             will(returnValue(10.0));
+		             
+		             one(values).getValue(4, 1);
+		             will(returnValue(2.0));
+
+		         }
+		     });
+		     int[] validRows = {0, 2, 3};
+		     double actualResult = DataUtilities.calculateColumnTotal(values, 0, validRows);
+		     double expectedResult = 14.0;
+		     assertEquals("Checking function returns correct column sum",expectedResult, actualResult, .000000001d);
+		 }
+	  
+	
+	  
+	// ------- End of tests for calculateColumnTotal(Values2D data, int column, int[] validRows): double -------	
+	
+	
+	
+	// ------- End of Added Lab 3 Test Cases -------
 	
 	
 	 // -----------------------------------------------------------------------------------------
