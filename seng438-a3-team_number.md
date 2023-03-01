@@ -2,12 +2,13 @@
 
 **Lab. Report #3 – Code Coverage, Adequacy Criteria and Test Case Correlation**
 
-| Group \#:      |     |
+| Group \#: 6    |     |
 | -------------- | --- |
 | Student Names: |     |
-|                |     |
-|                |     |
-|                |     |
+| Maarya Ahmed   |     |
+| Jinsu Kwak     |     |
+| Jack Li        |     |
+| Hannah Son     |     |
 
 (Note that some labs require individual reports while others require one report
 for each group. Please see each lab document for details.)
