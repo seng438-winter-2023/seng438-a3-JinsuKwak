@@ -14,7 +14,7 @@ public class RangeTest {
     private Range rangeLarge;
     private Range intersectRange;
     private Range exampleRange2;
-    
+    private Range testRange;
     @BeforeClass public static void setUpBeforeClass() throws Exception {
     }
 
@@ -515,6 +515,324 @@ public class RangeTest {
 	}
 	
 	// ------- End of tests for contains(double):boolean -------	
+   		
+   	
+	// -----------------------------------------------------------------------------------------
+	// Start of Test Code LAB3
+	// -----------------------------------------------------------------------------------------
+   		
+	// ------- Test for shiftWithNoZeroCrossing(double, double): double -------
+   	// *** duplicated with shift(Range base, double delta): Range ***
+   	
+   	// Statement Coverage	: 100%
+   	// Branch Coverage		: 100%
+   	
+    /*
+   	 *  This test will simulate when input Range of (lower bound + delta < 0) where lower bound > 0
+ 	 *  Expected result: Range(0, UpperBound + delta)
+     */
+ 
+   	@Test(timeout = 1000)
+   	public void testShiftWithNoZeroCrossingValueGreaterThanZeroUpperBound() {
+   		testRange = new Range(5, 10);												
+   		Range shiftedRange = Range.shift(testRange, -6);		// 5 + (-6), 10 + (-6)
+   		assertEquals("The shifted upperbound value should be ", 4, shiftedRange.getUpperBound(), .000000001d);
+   	}
+   	
+   	@Test(timeout = 1000)
+   	public void testShiftWithNoZeroCrossingValueGreaterThanZeroLowerBound() {
+   		testRange = new Range(5, 10);
+   		Range shiftedRange = Range.shift(testRange, -6);		// 5 + (-6), 10 + (-6)
+   		assertEquals("The shifted lowerbound value should be ", 0, shiftedRange.getLowerBound(), .000000001d);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input Range of upper bound + delta > 0 when upper bound < 0
+ 	 *  Expected result: Range(LowerBound + delta, 0)
+     */
+
+   	@Test(timeout = 1000)
+   	public void testShiftWithNoZeroCrossingValueLessThanZeroUpperBound() {
+   		testRange = new Range(-10, -5);
+   		Range shiftedRange = Range.shift(testRange, 6);			// -10 + (+6), -5 + (+6)
+   		assertEquals("The shifted upperbound value should be ", 0, shiftedRange.getUpperBound(), .000000001d);
+   	}
+   	
+   	@Test(timeout = 1000)
+   	public void testShiftWithNoZeroCrossingValueLessThanZeroLowerBound() {
+   		testRange = new Range(-10, -5);
+   		Range shiftedRange = Range.shift(testRange, 6);			// -10 + (+6), -5 + (+6)
+   		assertEquals("The shifted lowerbound value should be ", -4, shiftedRange.getLowerBound(), .000000001d);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input Range at (0,0)
+ 	 *  Expected result: Range(LowerBound + delta, UpperBound + delta)
+     */
+   	
+   	@Test(timeout = 1000)
+   	public void testShiftWithNoZeroCrossingValueEqualZeroUpperBound() {
+   		testRange = new Range(0, 0);
+   		Range shiftedRange = Range.shift(testRange, 6);			// 0 + (+6), 0 + (+6)
+   		assertEquals("The shifted upperbound value should be ", 6, shiftedRange.getUpperBound(), .000000001d);
+   	}
+   	
+   	@Test(timeout = 1000)
+   	public void testShiftWithNoZeroCrossingValueEqualZeroLowerBound() {
+   		testRange = new Range(0, 0);
+   		Range shiftedRange = Range.shift(testRange, 6);			// 0 + (+6), 0 + (+6)
+   		assertEquals("The shifted lowerbound value should be ", 6, shiftedRange.getLowerBound(), .000000001d);
+   	}
+   	
+	// ------- Test for hashCode(): int -------
+   	
+   	// Statement Coverage	: 100%
+   	// Branch Coverage		: 100% (no branch)
+   	
+   	@Test(timeout = 1000)
+   	public void testHashCode() {
+   		testRange = new Range(-1, 1);
+   		Integer hash = Integer.valueOf(testRange.hashCode());
+   		assertTrue("Hash does not generated", hash instanceof Integer);
+   	}
+   	
+	// ------- Test for combineIgnoringNaN(Range range1, Range range2): Range -------
+   	
+   	// Statement Coverage	: 100%
+   	// Branch Coverage		: 92.9%
+   	
+    /*
+   	 *  This test will simulate when input Range 1 is Null, Range 2 is not Null but NaN
+ 	 *  Expected result: null
+     */
+   	@Test(timeout = 1000)
+   	public void testCombineIgnoringNaN_R1Null_R2NotNullNaN() {
+   		double zero = 0;
+   		double NaN = zero/zero;									// creating not a number
+   		Range r1 = null;										// range 1 will be null range
+   		Range r2 = new Range (NaN, NaN);						// range 2 will be NaN range
+   		Range actualRange = Range.combineIgnoringNaN(r1, r2);	// combine null range with not null and NaN range
+   		assertNull("The expected object should be Null", actualRange);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input Range 1 is Null, Range 2 is Null
+ 	 *  Expected result: null
+     */
+   	@Test(timeout = 1000)
+   	public void testCombineIgnoringNaN_R1Null_R2Null() {
+   		Range r1 = null;										// range 1 will be null range
+   		Range r2 = null;										// range 2 will be null range
+   		Range actualRange = Range.combineIgnoringNaN(r1, r2);	// combine null range with not null and null range
+   		assertNull("The expected object should be Null", actualRange);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input Range 1 is Null, Range 2 is Normal
+ 	 *  Expected result: Range 2
+     */
+   	@Test(timeout = 1000)
+   	public void testCombineIgnoringNaN_R1Null_R2Normal() {
+   		Range r1 = null;										// range 1 will be null range
+   		Range r2 = new Range (-1,1);							// range 2 will be normal range
+   		Range actualRange = Range.combineIgnoringNaN(r1, r2);	// combine null range with not null and normal range
+   		Range expectedRange = new Range (-1,1);
+   		assertEquals("The returned object should be Range(-1,1)", expectedRange, actualRange );
+   	}
+   	
+    /*
+   	 *  This test will simulate when input Range 1 is notNull but NaN, Range 2 is null
+ 	 *  Expected result: null
+     */
+   	@Test(timeout = 1000)
+   	public void testCombineIgnoringNaN_R1NotNullNaN_R2Null() {
+   		double zero = 0;
+   		double NaN = zero/zero;									// creating not a number
+   		Range r1 = new Range (NaN, NaN);						// range 1 will be NaN range
+   		Range r2 = null;										// range 2 will be null range
+   		Range actualRange = Range.combineIgnoringNaN(r1, r2);	// combine  not null and NaN range null range
+   		assertNull("The expected object should be Null", actualRange);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input Range 1 is Normal, Range 2 is Null
+ 	 *  Expected result: Range 1
+     */
+   	@Test(timeout = 1000)
+   	public void testCombineIgnoringNaN_R1Normal_R2Null() {
+   		Range r1 = new Range (-1,1);							// range 1 will be normal range
+   		Range r2 = null;										// range 2 will be null range
+   		Range actualRange = Range.combineIgnoringNaN(r1, r2);	// combine normal range with null range;
+   		Range expectedRange = new Range (-1,1);
+   		assertEquals("The returned object should be Range(-1,1)", expectedRange, actualRange );
+   	}
+   	
+    /*
+   	 *  This test will simulate when input Range 1 is Null, Range 2 is Null
+ 	 *  Expected result: null
+     */
+   	@Test(timeout = 1000)
+   	public void testCombineIgnoringNaN_BothNaN() {
+   		double zero = 0;
+   		double NaN = zero/zero;									// creating not a number
+   		Range r1 = new Range (NaN, NaN);						// range 1 will be NaN range
+   		Range r2 = new Range (NaN, NaN);						// range 2 will be NaN range
+   		Range actualRange = Range.combineIgnoringNaN(r1, r2);	// combine NaN range with NaN range;
+   		assertNull("The expected object should be Null", actualRange);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input Range 1 is Normal, Range 2 is Normal
+ 	 *  Expected result: Combined Range
+     */
+   	@Test(timeout = 1000)
+   	public void testCombineIgnoringNaN_BothNormal() {
+   		Range r1 = new Range(-2 , 1);							// range 1 will be normal range
+   		Range r2 = new Range(-1 , 2);							// range 2 will be normal range
+   		Range actualRange = Range.combineIgnoringNaN(r1, r2);	// combine null range with null range;
+   		Range expectedRange = new Range(-2,2);
+   		assertEquals("The returned object should be Range(-2,2)", expectedRange, actualRange );
+   	}
+ 
+   	
+   	
+	// ------- min(double d1, double d2): double -------
+   	
+   	// Statement Coverage	: 100%
+   	// Branch Coverage		: 100% 
+   	
+    /*
+   	 *  This test will simulate when input d1 is Normal, Range d2 is Normal
+   	 *  Also, this test will use combineIgnoreingNaN function to test Range.min(double d1, double d2)
+ 	 *  Expected result: min value should be set as new range
+     */
+   	
+   	@Test(timeout = 1000)
+   	public void testMin_BothNormal() {
+   		double d1 = -20;
+   		double d2 = 10;
+   		Range r1 = new Range(-10,10);							// created to call combineIgnoreingNaN method
+   		Range actualRange = Range.combineIgnoringNaN(r1, new Range(d1,d2));	
+   		Range expectedRange = new Range(-20,10);
+   		assertEquals("The returned object should be Range(-20,10)", expectedRange, actualRange );
+   	}
+   	
+    /*
+   	 *  This test will simulate when input d1 is Normal, Range d2 is NaN
+   	 *  Also, this test will use combineIgnoreingNaN function to test Range.min(double d1, double d2)
+ 	 *  Expected result: min value should be set as new range
+     */
+   	
+   	@Test(timeout = 1000)
+   	public void testMin_d1NaN_d2Normal() {
+   		double zero = 0;
+   		double NaN = zero/zero;									// creating not a number
+   		double d2 = 10;
+   		Range r1 = new Range(-10,10);							// created to call combineIgnoreingNaN method
+   		Range actualRange = Range.combineIgnoringNaN(r1, new Range(NaN,d2));	
+   		Range expectedRange = new Range(-10,10);
+   		assertEquals("The returned object should be Range(-10,10)", expectedRange, actualRange );
+   	}
+   	
+    /*
+   	 *  This test will simulate when input d1 is NaN, Range d2 is Normal
+   	 *  Also, this test will use combineIgnoreingNaN function to test Range.min(double d1, double d2)
+ 	 *  Expected result: Range 1
+     */
+   	
+   	@Test(timeout = 1000)
+   	public void testMin_d1NaN_d2NaN() {
+   		double zero = 0;
+   		double NaN = zero/zero;									// creating not a number
+   		Range r1 = new Range(-10,10);							// created to call combineIgnoreingNaN method
+   		Range actualRange = Range.combineIgnoringNaN(r1, new Range(NaN,NaN));	
+   		Range expectedRange = new Range(-10,10);
+   		assertEquals("The returned object should be Range(-10,10)", expectedRange, actualRange );
+   	}
+   	
+   	
+	// ------- isNaNRange(): boolean -------
+   	
+   	// Statement Coverage	: 100%
+   	// Branch Coverage		: 100% 
+   	
+    /*
+   	 *  This test will simulate when input ranges lower bound is normal, upper bound is Normal
+ 	 *  Expected result: False
+     */
+   	
+   	@Test(timeout = 1000)
+   	public void testIsNaNRange_bothNormal() {
+   		testRange = new Range(-1,1);
+   		boolean result = testRange.isNaNRange();
+   		assertFalse("false should be returned with non-NaN range", result);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input ranges lower bound is NaN, upper bound is Normal
+ 	 *  Expected result: False
+     */
+   	
+   	@Test(timeout = 1000)
+   	public void testIsNaNRange_lbNaN_ubNormal() {
+   		double zero = 0;
+   		double NaN = zero/zero;									// creating not a number
+   		testRange = new Range(NaN,1);							// lb is NaN, but still non-NaN range
+   		boolean result = testRange.isNaNRange();
+   		assertFalse("false should be returned with non-NaN range", result);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input ranges lower bound is Normal, upper bound is NaN
+ 	 *  Expected result: False
+     */
+   	
+   	@Test(timeout = 1000)
+   	public void testIsNaNRange_lbNormal_ubNaN() {
+   		double zero = 0;
+   		double NaN = zero/zero;									// creating not a number
+   		testRange = new Range(-1,NaN);							// ub is NaN, but still non-NaN range
+   		boolean result = testRange.isNaNRange();
+   		assertFalse("false should be returned with non-NaN range", result);
+   	}
+   	
+    /*
+   	 *  This test will simulate when input ranges lower bound is NaN, upper bound is NaN
+ 	 *  Expected result: True
+     */
+ 
+   	@Test(timeout = 1000)
+   	public void testIsNaNRange_lbNaN_ubNaN() {
+   		double zero = 0;
+   		double NaN = zero/zero;									// creating not a number
+   		testRange = new Range(NaN,NaN);							// ub and lb are NaN,NaN range
+   		boolean result = testRange.isNaNRange();
+   		assertTrue("True should be returned with NaN range", result);
+   	}
+   	
+   	// ------- Additional Tests for combine(Range range1, Range range2): Range from LAB2 -------
+   	// Statement Coverage	: 100% --> 100%
+   	// Branch Coverage		: 100% --> 100%
+   	
+
+
+
+   	// ------- Additional Tests for getLowerBound(): double from LAB2 -------
+   	// *** unable to reach uncovered parts due to code structures ***
+   	// Statement Coverage	: 40% --> ??%
+   	// Branch Coverage		: 50% --> ??%
+   	
+    /*
+   	 *  This test will simulate when input Range is invalid when (upper < lower)
+ 	 *  Expected result: IllegalArgumentException
+     */
+   	
+	@Test(expected = IllegalArgumentException.class) 
+	public void testGetLowerBoundwithIllegalRange() {
+		Range tempRange = new Range(-100,10); // ERROR THROWN HERE
+		double actualLowerBound = tempRange.getLowerBound();
+		assertNotNull("method did not throw IllegalArgumentException when input Range is Illegal (upper < lower)", actualLowerBound);
+	}
 	
 	// -----------------------------------------------------------------------------------------
 	// End of Test Code
@@ -522,6 +840,7 @@ public class RangeTest {
 
     @After
     public void tearDown() throws Exception {
+    	testRange = null;
     }
 
     @AfterClass
