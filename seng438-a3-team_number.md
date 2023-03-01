@@ -22,7 +22,31 @@ Text…
 
 # 3 A detailed description of the testing strategy for the new unit test
 
-Text…
+    Range:
+        -constrain(double): double
+        -equals(Object): boolean
+        -toString(): String
+        -max(double d1, double d2): double
+        -getUpperBound(): double
+        -scale(Range base, double factor): Range
+        -shiftWithNoZeroCrossing(double, double): double
+        -hashCode(): int
+        -combineIgnoringNaN(Range range1, Range range2): Range
+        -min(double d1, double d2): double
+        -isNaNRange(): boolean
+        -expand(Range, double, double): Range
+        -expandToInclude(Range, double): Range
+        -shift(Range, double): Range
+        -shift(Range, double, boolean): Range
+        -intersects(Range, range): boolean
+        
+        
+    DataUtilities:
+        -calculateRowTotal(Values2D data, int row, int[] validCols): double
+        -equal(double[][] a, double[][] b): boolean
+        -clone(double[][] source): double[][]
+        -calculateColumnTotal(Values2D data, int column, int[] validRows): double
+
 
 # 4 A high level description of five selected test cases you have designed using coverage information, and how they have increased code coverage
 
