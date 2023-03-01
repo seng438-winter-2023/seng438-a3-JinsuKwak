@@ -39,9 +39,13 @@ public class RangeTest {
         0, exampleRange.getCentralValue(), .000000001d);
     }
     
-	// -----------------------------------------------------------------------------------------
-	// Start of Test Code
-	// -----------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------
+    // Start of Test Code
+    // -----------------------------------------------------------------------------------------
+	
+    // -----------------------------------------------------------------------------------------
+    // Start of Test Code LAB2
+    // -----------------------------------------------------------------------------------------
     	
     // ------- Test for combine(Range range1, Range range2) -------
     
@@ -515,6 +519,10 @@ public class RangeTest {
 	}
 	
 	// ------- End of tests for contains(double):boolean -------	
+	
+	// -----------------------------------------------------------------------------------------
+	// End of Test Code LAB2
+	// -----------------------------------------------------------------------------------------
    		
    	
 	// -----------------------------------------------------------------------------------------
@@ -833,6 +841,75 @@ public class RangeTest {
 		double actualLowerBound = tempRange.getLowerBound();
 		assertNotNull("method did not throw IllegalArgumentException when input Range is Illegal (upper < lower)", actualLowerBound);
 	}
+	
+	
+	// ------- Tests for getUpperBound(): double -------
+   	
+   	/*
+     *  This test will simulate when input range's lower bound is greater than range's upper bound
+     *  Expected result: Exception thrown
+     */
+   	@Test(expected = IllegalArgumentException.class) // expecting an exception
+	public void testGetUpperBoundWrongBounds() {
+		double actualUpperBound = wrongRange.getUpperBound();
+	}
+   	
+   	/*
+     *  This test will simulate when input range's lower bound is lower than range's upper bound
+     *  Expected result: upper bound of input range
+     */
+   	@Test(timeout = 1000) // timeout: 1000
+	public void testGetUpperBoundNominal() {
+		double actualUpperBound = rangeNomial.getUpperBound();
+		double expectedUpperBound = 10.0;
+		assertEquals("Upper bound was different when input was nomial range", expectedUpperBound, actualUpperBound, .000000001d);
+	}
+   	
+   	// ------- End of tests for getUpperBound(): double -------	
+   	
+   	// ------- Test for scale(Range base, double factor): Range -------
+   	
+   	/*
+     *  This test will simulate when input base Range is null
+     *  Expected result: Exception thrown
+     */
+   	@Test(expected = IllegalArgumentException.class) // expecting an exception
+	public void testScaleRangeNull() {
+		Range.scale(null,  1.0);
+	}
+   	
+   	/*
+     *  This test will simulate when input argument factor is negative
+     *  Expected result: Exception thrown
+     */
+   	@Test(expected = IllegalArgumentException.class) // expecting an exception
+	public void testScaleNegativeFactor() {
+		Range.scale(rangeNomial,  -3.0);
+	}
+   	
+   	/*
+     *  This test will simulate when input argument base Range is nomial and factor is positive
+     *  Expected result: new valid Range returned
+     */
+   	@Test(timeout = 1000) // timeout: 1000
+	public void testScaleNomialRangePositiveFactor() {
+		Range actualRange = Range.scale(rangeNomial, 2.0);
+		double expectedUpperBound = 20.0;
+		double actualUpperBound = actualRange.getUpperBound();
+		double expectedLowerBound = -20.0;
+		double actualLowerBound = actualRange.getLowerBound();
+		
+		assertEquals("Upper Bound was different when input base range was nomial and factor was positive", expectedUpperBound, actualUpperBound, .000000001d);
+		assertEquals("Lower Bound was different when input base range was nomial and factor was positive", expectedLowerBound, actualLowerBound, .000000001d);
+	}
+   	
+   	// ------- End of tests for scale(Range base, double factor): Range -------	
+   	
+	
+	
+	// -----------------------------------------------------------------------------------------
+	// End of Test Code LAB3
+	// -----------------------------------------------------------------------------------------
 	
 	// -----------------------------------------------------------------------------------------
 	// End of Test Code
