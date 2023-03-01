@@ -2,7 +2,7 @@
 
 **Lab. Report #3 – Code Coverage, Adequacy Criteria and Test Case Correlation**
 
-| Group \#: 6    |     |
+| Group     6    |     |
 | -------------- | --- |
 | Maarya Ahmed   |     |
 | Jinsu Kwak     |     |
