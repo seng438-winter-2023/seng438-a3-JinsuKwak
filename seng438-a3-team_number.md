@@ -4,7 +4,6 @@
 
 | Group \#: 6    |     |
 | -------------- | --- |
-| Student Names: |     |
 | Maarya Ahmed   |     |
 | Jinsu Kwak     |     |
 | Jack Li        |     |
