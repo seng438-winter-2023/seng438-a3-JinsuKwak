@@ -40,30 +40,26 @@ Text…
 
 Advantages of Requirements-Based Test Generation
 
--Ensures that requirements have been covered and tested
-
+    -Ensures that requirements have been covered and tested
 
 
 Disadvantages of Requirements-Based Test Generation
 
--Does not ensure that the code has been tested
-
+    -Does not ensure that the code has been tested
 
 
 Advantages of Coverage-Based Test Generation
 
--Ensures that the code has been tested
+    -Ensures that the code has been tested
 
--Gives a measurement of how much unit testing has been done 
-
+    -Gives a measurement of how much unit testing has been done 
 
 
 Disadvantages of Coverage-Based Test Generation
 
--Does not test if the code has been developed according to the requirements (just that the code works properly)
+    -Does not test if the code has been developed according to the requirements (just that the code works properly)
 
--100% coverage does not guarantee the effectiveness of a test suite
-
+    -100% coverage does not guarantee the effectiveness of a test suite
 
 
 # 8 A discussion on how the team work/effort was divided and managed
