@@ -65,12 +65,12 @@ Disadvantages of Coverage-Based Test Generation
 # 8 A discussion on how the team work/effort was divided and managed
 
 Section 3.1: Measure Control Flow Coverage
-    -This section was completed as a group
+        -This section was completed as a group
     
     
 Section 3.2: Measure Data Flow Coverage Manually
-    -Method DataUtilities.calculateColumnTotal() was done by Jinsu and Jack
-    -Method Range.getLength() was done by Maarya and Hannah
+        -Method DataUtilities.calculateColumnTotal() was done by Jinsu and Jack
+        -Method Range.getLength() was done by Maarya and Hannah
 
 
 Section 3.3: Test Suite Development
