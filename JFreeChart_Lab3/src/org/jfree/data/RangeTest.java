@@ -3,6 +3,7 @@ package org.jfree.data;
 import static org.junit.Assert.*; 
 import org.jfree.data.Range; 
 import org.junit.*;
+import java.security.InvalidParameterException;
 
 public class RangeTest {
     private Range exampleRange;			// Given Example from LAB Document
@@ -1058,7 +1059,342 @@ public class RangeTest {
 	   	
 	// ------- End of Test for max(double d1, double d2): double-------  	
 	
+	   	// ------- Test for expand(Range, double, double)-------
+ 	
+ 	/*
+ 	 *  This test will simulate when the input is standard 
+     *  Expected result: returns the expected range
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandBase() {
+     	Range RangeExpand = new Range(1,2);
+     	Range expanded = Range.expand(RangeExpand, 2, 0.5);
+ 		assertEquals("The expected lower bound is -1", -1, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 2.5", 2.5, expanded.getUpperBound(),.000000001d);
+ 	}
+     	
+    
+ 	/*
+ 	 *  This test will simulate when the input is null 
+  	 *  Expected result: Throws InvalidParameterException
+  	 */
+ 	@Test
+	public void testExpandNullRange() {
+ 		try {
+ 		 	Range RangeExpand = null;
+ 		 	Range expanded = Range.expand(RangeExpand, 2, 0.5);
+ 		}catch(Exception e) {
+ 		 	assertEquals("InvalidParameterException was thrown", InvalidParameterException.class, e.getClass());
+ 		}
+	}
+ 	/*
+ 	 *  This test will simulate when the input is standard, but negative
+     *  Expected result: returns the expected range
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandBaseNegative() {
+     	Range RangeExpand = new Range(1,2);
+     	Range expanded = Range.expand(RangeExpand, -2, -0.5);
+ 		assertEquals("The expected lower bound is 2", 2, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 1", 1, expanded.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when the upperMargin is smaller than the lowerMargin
+     *  Expected result: returns the expected range
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandBaseUpperSmallerThanLower() {
+     	Range RangeExpand = new Range(1,2);
+     	Range expanded = Range.expand(RangeExpand, 5, 2);
+ 		assertEquals("The expected lower bound is -3", -3, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 4", 4, expanded.getUpperBound(),.000000001d);
+ 	}
+     	
+     	
+     // ------- End of tests for expand(Range, double, double) -------
+   	
+   	// ------- Test for expandToInclude(Range, double)-------   	
+ 	/*
+ 	 *  This test will simulate when the input is standard and on the right side of the range
+     *  Expected result: returns the upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandToIncludeUpper() {
+     	Range RangeExpand = new Range(1,2);
+     	Range expanded = Range.expandToInclude(RangeExpand, 5);
+ 		assertEquals("The expected lower bound is 1", 1, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 5", 5, expanded.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when the input is standard and on the left side of the range 
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandToIncludeLower() {
+     	Range RangeExpand = new Range(1,2);
+     	Range expanded = Range.expandToInclude(RangeExpand, 0);
+ 		assertEquals("The expected lower bound is 0", 0, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 2", 2, expanded.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when the input is negative and on the left side of the range 
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandToIncludeNegative() {
+     	Range RangeExpand = new Range(1,2);
+     	Range expanded = Range.expandToInclude(RangeExpand, -5);
+ 		assertEquals("The expected lower bound is -5", -5, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 2", 2, expanded.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when the input is positive and the range is null
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandToIncludeNull() {
+     	Range RangeExpand = null;
+     	Range expanded = Range.expandToInclude(RangeExpand, 5);
+ 		assertEquals("The expected lower bound is 5", 5, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 5", 5, expanded.getUpperBound(),.000000001d);
+ 	}
+     	
+    // ------- End of tests for expandToInclude(Range, double) -------
+    // ------- Test for shift(Range, double):Range-------   
+ 	/*
+ 	 *  This test will simulate when delta is positive 
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShiftPositiveRangePositive() {
+     	Range RangeShift = new Range(1,2);
+     	Range shifted = Range.shift(RangeShift, 5);
+ 		assertEquals("The expected lower bound is 6", 6, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 7", 7, shifted.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when delta is negative 
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShiftPositiveRangeNegative() {
+     	Range RangeShift = new Range(1,2);
+     	Range shifted = Range.shift(RangeShift, -5);
+ 		assertEquals("The expected lower bound is 0", 0, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 0", 0, shifted.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when delta is positive in a negative range
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShiftNegativeRangePositive() {
+     	Range RangeShift = new Range(-2,-1);
+     	Range shifted = Range.shift(RangeShift, 5);
+ 		assertEquals("The expected lower bound is 0", 0, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 0", 0, shifted.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when delta is negative in a negative range
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShiftNegativeRangeNegative() {
+     	Range RangeShift = new Range(-2,-1);
+     	Range shifted = Range.shift(RangeShift, -5);
+ 		assertEquals("The expected lower bound is -7", -7, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is -6", -6, shifted.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when the Range is null 
+     *  Expected result: IllegalParameterException is thrown
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShiftNullRange() {
+    	try {
+    		Range RangeShift = null;
+         	Range shifted = Range.shift(RangeShift, 5);	
+    	}
+    	catch(Exception e){
+    	 	assertEquals("InvalidParameterException was thrown", InvalidParameterException.class, e.getClass());
+    	}
+  
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when delta is large
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShiftLargeDelta() {
+     	Range RangeShift = new Range(1,2);
+     	Range shifted = Range.shift(RangeShift, 500);
+ 		assertEquals("The expected lower bound is 501", 501, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 502", 502, shifted.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when delta is small
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShiftSmallDelta() {
+     	Range RangeShift = new Range(1,2);
+     	Range shifted = Range.shift(RangeShift, 0.01);
+ 		assertEquals("The expected lower bound is 1.01", 1.01, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 2.01", 2.01, shifted.getUpperBound(),.000000001d);
+ 	}
+     	
+     	
+    // ------- End of tests for shift(Range, double):Range -------
+    
+    // ------- Test for shift(Range, double, boolean):Range-------   
+ 	/*
+ 	 *  This test will simulate when delta is positive and ZeroCrossing is allowed
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShift2PositiveRangePositive() {
+     	Range RangeShift = new Range(1,2);
+     	Range shifted = Range.shift(RangeShift, 5, true);
+ 		assertEquals("The expected lower bound is 6", 6, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 7", 7, shifted.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when delta is negative and ZeroCrossing is allowed
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShift2PositiveRangeNegative() {
+     	Range RangeShift = new Range(1,2);
+     	Range shifted = Range.shift(RangeShift, -5, true);
+ 		assertEquals("The expected lower bound is -4", -4, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is -3", -3, shifted.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when delta is Positive and ZeroCrossing is allowed and the Range is Negative
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShift2NegativeRangePositive() {
+     	Range RangeShift = new Range(-10,-2);
+     	Range shifted = Range.shift(RangeShift, 5, true);
+ 		assertEquals("The expected lower bound is -5", -5, shifted.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 3", 3, shifted.getUpperBound(),.000000001d);
+ 	}
+    
+ 	/*
+ 	 *  This test will simulate when delta is Positive and ZeroCrossing is allowed and the Range is null
+     *  Expected result: IllegalParameterException is thrown
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testShift2NullRange() {
+    	try {
+         	Range RangeShift = null;
+         	Range shifted = Range.shift(RangeShift, 5, true);	
+    	}
+    	catch(Exception e) {
+    		assertEquals("InvalidParameterException was thrown", InvalidParameterException.class, e.getClass());
+    	}
+ 	}
+    
+    // ------- End of tests for shift(Range, double, boolean):Range -------
+    // ------- Test for intersects(Range, Range):Boolean-------   
+	// The assumed Range lower = 5, upper = 15;
 	
+	/*
+	 * This will test the case when a Range that is within the intersectRange is used
+	 * The expected value that will be asserted is TRUE, as the ranges should intersect.
+	 */
+	
+	@Test(timeout = 1000) // timeout: 1000
+	public void testIntersects2RangeWithinRange() {
+		Range testRange= new Range(10.5,14.5);
+		boolean result = intersectRange.intersects(testRange);
+		assertTrue("The expected value is TRUE but returned: "+ result,result);
+	}
+	
+	
+	/*
+	 * The values of the Range exist outside the boundaries of the test range  to the left
+	 * The expected value that will be asserted is FALSE, as the ranges do not intersect.
+	 */
+	
+	@Test(timeout = 1000) // timeout: 1000
+	public void testIntersects2OutsideRangeToLeft() {
+		Range testRange= new Range(-5.2,4);
+		boolean result = intersectRange.intersects(testRange);
+		assertFalse("The expected value is FALSE but returned: "+ result,result);
+	}
+	
+
+	/*
+	 * This will test the case when the test Range is partially in the intersectRange on the Right side
+	 * The expected value that will be asserted is TRUE, as the ranges should intersect.
+	 */
+	
+	@Test(timeout = 1000) // timeout: 1000
+	public void testIntersects2WithinRangeToRight() {
+		Range testRange= new Range(14.5,20);
+		boolean result = intersectRange.intersects(testRange);
+		assertTrue("The expected value is TRUE but returned: "+ result,result);
+	}
+	
+	
+	
+	/*
+	 * This will test the case when the test Range is partially in the Range on the left side of the Range
+	 * The expected value that will be asserted is TRUE, as the ranges should intersect.
+	 */
+	
+	@Test(timeout = 1000) // timeout: 1000
+	public void testIntersects2WithinRangeToLeft() {
+		Range testRange= new Range(-5.2,5.2);
+		boolean result = intersectRange.intersects(testRange);
+		assertTrue("The expected value is TRUE but returned: "+ result,result);
+	}
+	
+	
+	/*
+	 * This will test the case when a Range outside to the right is used
+	 * The expected value that will be asserted is FALSE, as the ranges should not intersect.
+	 */
+	
+	@Test(timeout = 1000) // timeout: 1000
+	public void testIntersects2OutsideRangeToRight() {
+		Range testRange= new Range(20,25);
+		boolean result = intersectRange.intersects(testRange);
+		assertFalse("The expected value is FALSE but returned: "+ result,result);
+	}
+    
+	/*
+	 * This will test the case when a null test range is used.
+	 * The expected value that is expected is that an IllegalParameterException is thrown
+	 */
+	
+	@Test(timeout = 1000) // timeout: 1000
+	public void testIntersects2NullRange() {
+		try {
+			Range testRange= null;
+			boolean result = intersectRange.intersects(testRange);	
+		}
+		catch(Exception e) {
+    		assertEquals("InvalidParameterException was thrown", InvalidParameterException.class, e.getClass());
+		}
+
+	}
+
+    // ------- End of tests for intersects(Range, Range):Boolean -------
 	// -----------------------------------------------------------------------------------------
 	// End of Test Code LAB3
 	// -----------------------------------------------------------------------------------------
