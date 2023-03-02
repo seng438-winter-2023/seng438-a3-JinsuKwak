@@ -1112,7 +1112,12 @@ public class DataUtilitiesTest {
 	   */
 	  @Test
 	  public void testCloneNullValueInInput() {
-		 double[][] source = {{3.0, 5.0, (Double) null},{8.0,19.0,4.0}};
+		 double[][] source = new double[2][3];
+		 source[0][0] = 3.0;
+		 source[0][1] = 5.0;
+		 source[1][0] = 8.0;
+		 source[1][1] = 19.0;
+		 source[1][2] = 4.0;
 		 
    	     double[][] actualResult = DataUtilities.clone(source);
 		 assertEquals("Checking clone when there is null value in input", 3.0, actualResult[0][0], .000000001d);
