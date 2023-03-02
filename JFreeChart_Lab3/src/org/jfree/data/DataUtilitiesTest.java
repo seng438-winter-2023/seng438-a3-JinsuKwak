@@ -1172,19 +1172,19 @@ public class DataUtilitiesTest {
 		             one(values).getRowCount();
 		             will(returnValue(5));
 		             
-		             one(values).getValue(0, 1);
+		             one(values).getValue(0, 0);
 		             will(returnValue(3.0));
 		             
-		             one(values).getValue(1, 1);
+		             one(values).getValue(1, 0);
 		             will(returnValue(null));
 		             
-		             one(values).getValue(2, 1);
+		             one(values).getValue(2, 0);
 		             will(returnValue(1.0));
 		             
-		             one(values).getValue(3, 1);
+		             one(values).getValue(3, 0);
 		             will(returnValue(10.0));
 		             
-		             one(values).getValue(4, 1);
+		             one(values).getValue(4, 0);
 		             will(returnValue(2.0));
 
 		         }
@@ -1208,19 +1208,19 @@ public class DataUtilitiesTest {
 		             one(values).getRowCount();
 		             will(returnValue(5));
 		             
-		             one(values).getValue(0, 1);
+		             one(values).getValue(0, 0);
 		             will(returnValue(3.0));
 		             
-		             one(values).getValue(1, 1);
+		             one(values).getValue(1, 0);
 		             will(returnValue(8.0));
 		             
-		             one(values).getValue(2, 1);
+		             one(values).getValue(2, 0);
 		             will(returnValue(1.0));
 		             
-		             one(values).getValue(3, 1);
+		             one(values).getValue(3, 0);
 		             will(returnValue(10.0));
 		             
-		             one(values).getValue(4, 1);
+		             one(values).getValue(4, 0);
 		             will(returnValue(2.0));
 
 		         }
