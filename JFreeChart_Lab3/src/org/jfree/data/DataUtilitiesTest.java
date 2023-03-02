@@ -1231,12 +1231,149 @@ public class DataUtilitiesTest {
 	// ------- End of tests for calculateColumnTotal(Values2D data, int column, int[] validRows): double -------	
 	
 	
+	//test for CalculateRowTotal(Values2D data, int row, int[] validCols)
+			 
+			 /*
+			  * test the total amount in row with row = 0 and column = 4
+			  * test if it adds correctly with the validCols
+			  * 
+			  */
+			 @Test(timeout = 1000) // timeout: 1000
+			 public void testCalculateRowTotalNoRow() {
+			
+			     Mockery mockingContext = new Mockery();
+			     final Values2D values = mockingContext.mock(Values2D.class);
+			     mockingContext.checking(new Expectations() {
+			         {
+			             one(values).getColumnCount();
+			             will(returnValue(4));
+			             
+			             one(values).getValue(0, 0);
+			             will(returnValue(3));
+			             
+			             one(values).getValue(0, 1); 
+			             will(returnValue(4));
+			             
+			             one(values).getValue(0, 2);
+			             will(returnValue(2));
+			             
+			             one(values).getValue(0, 3); 
+			             will(returnValue(3));
+			             
+			         }
+			     });
+			     int[] validCols = {0, 1, 2};
+			     double result = DataUtilities.calculateRowTotal(values, 0, validCols);
+			     // verify
+			     assertEquals(result, 9.0, .000000001d);
+			     // tear-down: NONE in this test method
+			 }
+			 
+			 /*
+			  * test the total amount in row with row = 0 and column = 0
+			  * test if it adds correctly with the validCols
+			  * 
+			  */
+			 @Test(timeout = 1000) // timeout: 1000
+			 public void testCalculateRowTotalNoRowNoColumn() {
+			
+			     Mockery mockingContext = new Mockery();
+			     final Values2D values = mockingContext.mock(Values2D.class);
+			     mockingContext.checking(new Expectations() {
+			         {
+			        	 one(values).getColumnCount();
+			             will(returnValue(0));
+			             
+			             one(values).getValue(0, 0);
+			             will(returnValue(3));
+			  
+			             
+			         }
+			     });
+			     int[] validCols = {0};
+			     double result = DataUtilities.calculateRowTotal(values, 0, validCols);
+			     // verify
+			     assertEquals(result, 0.0, .000000001d);
+			 }
+			 
 	
-	
-      // -----------------------------------------------------------------------------------------
-      // End of Test Code LAB3
-      // -----------------------------------------------------------------------------------------
-	
+			 
+			 /*
+			  * test the total amount in row with row = 0 and a null value
+			  * test if it adds correctly with the validCols
+			  * 
+			  */
+			 @Test(timeout = 1000) // timeout: 1000
+			 public void testCalculateRowTotalNullValue() {
+			
+			     Mockery mockingContext = new Mockery();
+			     final Values2D values = mockingContext.mock(Values2D.class);
+			     mockingContext.checking(new Expectations() {
+			         {
+			        	 one(values).getColumnCount();
+			             will(returnValue(4));
+			             
+			             one(values).getValue(0, 0);
+			             will(returnValue(3));
+			             
+			             one(values).getValue(0, 1);
+			             will(returnValue(null));
+			             
+			             one(values).getValue(0, 2);
+			             will(returnValue(-1));
+			             
+			             one(values).getValue(0, 3);
+			             will(returnValue(-2));
+			  
+			             
+			         }
+			     });
+			     int[] validCols = {0, 1, 2};
+			     double result = DataUtilities.calculateRowTotal(values, 0, validCols);
+			     // verify
+			     assertEquals(result, 2.0, .000000001d);
+			 }
+			 
+			 /*
+			  * test the total amount in row with row = 0 and a null value
+			  * test if it adds correctly with the validCols
+			  * 
+			  */
+			 @Test(timeout = 1000) // timeout: 1000
+			 public void testCalculateRowTotalInvalidNumCols() {
+			
+			     Mockery mockingContext = new Mockery();
+			     final Values2D values = mockingContext.mock(Values2D.class);
+			     mockingContext.checking(new Expectations() {
+			         {
+			        	 one(values).getColumnCount();
+			             will(returnValue(4));
+			             
+			             one(values).getValue(0, 0);
+			             will(returnValue(4));
+			             
+			             one(values).getValue(0, 1);
+			             will(returnValue(null));
+			             
+			             one(values).getValue(0, 2);
+			             will(returnValue(-6));
+			             
+			             one(values).getValue(0, 3);
+			             will(returnValue(2));
+			  
+			             
+			         }
+			     });
+			     int[] validCols = {5};
+			     double result = DataUtilities.calculateRowTotal(values, 0, validCols);
+			     // verify
+			     assertEquals(result, 0, .000000001d);
+			 }
+					
+			 
+	// ------- End of Test for CalculateRowTotal(Values2D data, int row, int[] validCols) double -------
+			
+
 	
      // -----------------------------------------------------------------------------------------
      // End of Test Code
