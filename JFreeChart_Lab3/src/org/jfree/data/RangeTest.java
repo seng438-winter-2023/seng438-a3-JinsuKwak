@@ -15,6 +15,7 @@ public class RangeTest {
     private Range intersectRange;
     private Range exampleRange2;
     private Range testRange;
+    private Range wrongRange;
     @BeforeClass public static void setUpBeforeClass() throws Exception {
     }
 
@@ -28,6 +29,7 @@ public class RangeTest {
         rangeNegative = new Range(-100, -1);
         rangeNegativeLB = new Range(-1000, 1); 
         intersectRange = new Range(5,15);
+	wrongRange = new Range(10,-10);
     }
 
 	// -----------------------------------------------------------------------------------------
