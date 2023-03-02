@@ -905,16 +905,161 @@ public class RangeTest {
    	
    	// ------- End of tests for scale(Range base, double factor): Range -------	
    	
+	  	
+	 // ------- Test for constrain(double):double-------
+	   	
+	   	/* This test will test input that is near the upper range */
+	   	@Test
+	   	public void testConstrainInputThree() {
+	   		assertEquals("The value of 3.0 should be closest to range 1.0", 1.0, exampleRange.constrain(3.0), .000000001d);
+	   	}
+	   	
+	   	/* This test will test input that is the upper range */
+	   	@Test
+	   	public void testConstrainInputOne() {
+	   		assertEquals("The value of 1.0 should be closest to range 1.0", 1.0, exampleRange.constrain(1.0), .000000001d);
+	   	}
+	   	
+	   	/* This test will test input that is the lower range */
+	   	@Test
+	   	public void testConstrainInputNegativeOne() {
+	   		assertEquals("The value of -1.0 should be closest to range -1.0", -1.0, exampleRange.constrain(-1.0), .000000001d);
+	   	}
+	   	
+	   	/* This test will test input of zero */
+	   	@Test
+	   	public void testConstrainInputZero() {
+	   		assertEquals("The value of 0.0 should return 0.0", 0.0, exampleRange.constrain(0.0), .000000001d);
+	   	}
+	   	
+	   	/* This test will test input -5.0 which is near lower range */
+	   	@Test
+	   	public void testConstrainInputNegativeFive() {
+	   		assertEquals("The value of -5.0 be closest to range -1.0", -1.0, exampleRange.constrain(-5.0), .000000001d);
+	   	}
+	   	
+	   	/* This test will test input -5.0 which is near lower range */
+	   	@Test
+	   	public void testConstrainInputNaN() {
+	   		assertEquals("The value of NaN should return NaN", Double.NaN, exampleRange.constrain(Double.NaN), .000000001d);
+	   	}
+	   	
+		 // ------- End of Test for constrain(double):double-------
+	   	
+	   	
+	 // ------- Test for toString():String-------
+	   	
+		/* This test will test example range of [-1,1] to be converted to a string */
+	   	@Test
+	   	public void testToStringNormalRange() {
+	   		assertEquals("For range [-1,1], it should be converted as Range[-1,1]", "Range[-1.0,1.0]", exampleRange.toString());
+	   	}
+	   	
+	   	/* This test will test example range of [-1,1] to be converted to a string */
+	   	@Test
+	   	public void testToStringNaNRange() {
+	   		exampleRange2 = new Range(Double.NaN, Double.NaN);
+	   		assertEquals("For range [NaN,NaN], it should be converted as Range[NaN,NaN]", "Range[NaN,NaN]", exampleRange2.toString());
+	   	}
+	   	
+	    // ------- End of Test for toString(): String-------
+	   	
+	 // ------- Test for equals(Object): boolean-------
+	   	
+	   	//this test sends the same range and see if both are equal or not
+	   	@Test
+	   	public void testEqualsSameRangeObject() {
+	   		assertTrue("The range of [-1, 1] should equal to [-1, 1] ", exampleRange.equals(exampleRange));
+	   	}
+	   	
+	   	//this test sends an object that is not of type of range
+	   	@Test
+	   	public void testEqualsNotObject() {
+	   		
+	   		assertFalse("A double is not a range object ", rangeNomial.equals((Double) 1.5d));
+	   	}
+	   	
+	  //this test sees if the lower bound of sent range matches the lower bound of the object range
+	   	@Test
+	   	public void testEqualsLowerBoundNotSame() {
+	   		
+	   		assertFalse("The lower bound of range does not match with sent range ", exampleRange.equals(new Range(-5, 1)));
+	   	}
+	   	
+	  //this test sees if the upper bound of sent range matches the upper bound of the object range
+	   	@Test
+	   	public void testEqualsUpperBoundNotSame() {
+	   		
+	   		assertFalse("The upper bound of range does not match with sent range ", exampleRange.equals(new Range(-1, 5)));
+	   	}
+	   	
+	  //this test sees equals method can recognize NaN as a range and say it is equal
+	   	@Test
+	   	public void testEqualsNaNObject() {
+	   		exampleRange2 = new Range(Double.NaN, Double.NaN);
+	   		assertTrue("The range of NaN sent matches with the NaN range object ", exampleRange2.equals(exampleRange2));
+	   	}
+	   	
+	  //this test will test two completely different ranges for equality
+	   	@Test
+	   	public void testEqualsDiffObject() {
+	   		assertFalse("The ranges do not match ", exampleRange.equals(rangeNomial));
+	   	}
+	   	
+	 // ------- End of Test for equals(Object): boolean-------  	
+	   	
+	   	
+	// ------- Test for max(double d1, double d2): double-------
+
+		
+	   	//testing the max function by sending two positive ranges
+	   	@Test
+	   	public void testMaxBothNumsPos() {
+	   		//exampleRange2 = exampleRange2.combineIgnoringNaN(new Range(4,5), new Range(2,4));
+	   		
+//	   		Range outputRange = Range.combineIgnoringNaN(new Range(4,5), new Range(2,4));
+//	   		assertEquals("The max of 5 and 4 is 5 ", "5.0", outputRange.getUpperBound());
+	   		
+	   		// created to call combineIgnoreingNaN method
+	   		Range actualRange = Range.combineIgnoringNaN(new Range(-5,4), new Range(-5,2));	
+	   		Range expectedRange = new Range(-5,4);
+	   		assertEquals("The returned object should be Range(-5,4)", expectedRange, actualRange );
+	   		
+	   	}
+	   	
+	   	//testing the max function by sending a NaN argument
+	   	@Test
+	   	public void testMaxOneNumNaN() {
+	   		//exampleRange2 = exampleRange2.combineIgnoringNaN(new Range(4,5), new Range(2,4));
+//	   		Range outputRange = Range.combineIgnoringNaN(new Range(4,Double.NaN), new Range(2,4));
+//	   		assertEquals("The max of NaN and 4 is 4 ", "4.0", outputRange.getUpperBound());
+	   		
+	   		// created to call combineIgnoreingNaN method
+	   		Range actualRange = Range.combineIgnoringNaN(new Range(-5,4), new Range(Double.NaN,2));	
+	   		Range expectedRange = new Range(-5,4);
+	   		assertEquals("The returned object should be Range(-5,4)", expectedRange, actualRange );
+	   	}
+	   	
+	  //testing the max function by sending a both as NaN
+	   	@Test
+	   	public void testMaxBothNumNaN() {
+	   		//exampleRange2 = exampleRange2.combineIgnoringNaN(new Range(4,5), new Range(2,4));
+//	   		Range outputRange = Range.combineIgnoringNaN(new Range(4,6), new Range(2,Double.NaN));
+//	   		assertEquals("The max of 6 and NaN is 6 ", "6.0", outputRange.getUpperBound());
+			
+	   		// created to call combineIgnoreingNaN method
+	   		Range actualRange = Range.combineIgnoringNaN(new Range(-5,4), new Range(Double.NaN,Double.NaN));	
+	   		Range expectedRange = new Range(-5,4);
+	   		assertEquals("The returned object should be Range(-5,4)", expectedRange, actualRange );
+	   		
+	   	} 	
+	   	
+	// ------- End of Test for max(double d1, double d2): double-------  	
 	
 	
 	// -----------------------------------------------------------------------------------------
 	// End of Test Code LAB3
 	// -----------------------------------------------------------------------------------------
-	
-	// -----------------------------------------------------------------------------------------
-	// End of Test Code
-	// -----------------------------------------------------------------------------------------
-
     @After
     public void tearDown() throws Exception {
     	testRange = null;
