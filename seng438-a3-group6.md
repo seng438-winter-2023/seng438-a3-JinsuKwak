@@ -209,6 +209,10 @@ method: getLength()
 | msg     |  (134, 136)  |
 
 
+#### __Pairs covered per test case:__
+
+
+
 #### __DU pair Coverage:__
 
      Coverage = number of exercised DU pairs / number of DU pairs = 2/7 = 0.2857
