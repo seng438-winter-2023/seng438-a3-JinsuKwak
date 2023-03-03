@@ -1099,6 +1099,19 @@ public class RangeTest {
  		assertEquals("The expected lower bound is -4", -4, expanded.getLowerBound(),.000000001d);
  		assertEquals("The expected upper bound is 4", 4, expanded.getUpperBound(),.000000001d);
  	}
+    
+ 	/*
+ 	 *  This test will simulate when the upperMargin is smaller than the lowerMargin
+ 	 *  
+     *  Expected result: returns the expected range
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandBaseResultLowerGreaterThanUpper() {
+     	Range RangeExpand = new Range(1,2);
+     	Range expanded = Range.expand(RangeExpand, -2, 0.5);
+ 		assertEquals("The expected lower bound is 2.25", 2.25, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 3", 3, expanded.getUpperBound(),.000000001d);
+ 	}
      	
      	
      // ------- End of tests for expand(Range, double, double) -------
@@ -1152,6 +1165,17 @@ public class RangeTest {
  		assertEquals("The expected upper bound is 5", 5, expanded.getUpperBound(),.000000001d);
  	}
      	
+ 	/*
+ 	 *  This test will simulate when the input is within the Range
+     *  Expected result: returns the expected upper and lower bounds
+     */
+    @Test(timeout = 1000) // timeout: 1000
+ 	public void testExpandToIncludeValueWithin() {
+     	Range RangeExpand = new Range(1,5);
+     	Range expanded = Range.expandToInclude(RangeExpand, 3);
+ 		assertEquals("The expected lower bound is 1", 1, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 5", 5, expanded.getUpperBound(),.000000001d);
+ 	}
     // ------- End of tests for expandToInclude(Range, double) -------
     // ------- Test for shift(Range, double):Range-------   
  	/*
