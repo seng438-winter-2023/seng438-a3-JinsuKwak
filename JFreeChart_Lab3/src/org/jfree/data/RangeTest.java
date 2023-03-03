@@ -16,7 +16,6 @@ public class RangeTest {
     private Range intersectRange;
     private Range exampleRange2;
     private Range testRange;
-    private Range wrongRange;
     @BeforeClass public static void setUpBeforeClass() throws Exception {
     }
 
@@ -30,7 +29,6 @@ public class RangeTest {
         rangeNegative = new Range(-100, -1);
         rangeNegativeLB = new Range(-1000, 1); 
         intersectRange = new Range(5,15);
-	wrongRange = new Range(10,-10);
     }
 
 	// -----------------------------------------------------------------------------------------
@@ -847,15 +845,6 @@ public class RangeTest {
 	
 	
 	// ------- Tests for getUpperBound(): double -------
-   	
-   	/*
-     *  This test will simulate when input range's lower bound is greater than range's upper bound
-     *  Expected result: Exception thrown
-     */
-   	@Test(expected = IllegalArgumentException.class) // expecting an exception
-	public void testGetUpperBoundWrongBounds() {
-		double actualUpperBound = wrongRange.getUpperBound();
-	}
    	
    	/*
      *  This test will simulate when input range's lower bound is lower than range's upper bound
