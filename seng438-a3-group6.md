@@ -14,8 +14,8 @@ for each group. Please see each lab document for details.)
 
 # 1 Introduction
 
-Text…
-
+     In this assignment, the goal was to use Eclipse IDE to perform unit testing on classes. students will start by familiarizing themselves with the usage of the testing tools followed by implementation (enhancement) of the test suite such as conditional coverage, statement coverage and branch coverage. The main difference between assignment 2 and assignment 3 is the use og white-box testing where the code of the methods are given and students are required to create a test suite to cover majority of the lines of code.
+     
 # 2 Manual data-flow coverage calculations for X and Y methods
 
 
