@@ -54,8 +54,7 @@ Text…
 			expected output: Range = (-5, 4)
 
         -getUpperBound(): double
-            TC1: Input: range’s lower bound is greater than range’s upper bound
-            TC2: Input: range’s lower bound is lower than range’s upper bound
+            TC1: Input: range’s lower bound is lower than range’s upper bound
 	    
         -scale(Range base, double factor): Range
             TC1: Input: base = null, factor = 1.0
