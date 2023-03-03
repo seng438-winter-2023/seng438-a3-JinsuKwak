@@ -23,8 +23,8 @@ Text…
 
 __Data Flow Graph:__
 
-__Def-Use Sets per Statement:__
-Def-Path Set
+#### __Def-Use Sets per Statement:__
+ Def-Path Set
         
             du(1,data) = {[1,2],[1,2,3,4],[1,2,3,4,5,6,7],[1,2,3,4,5,6,12,13,14]}
             du(1,column) = {[1,2,3,4,5,6,7],[1,2,3,4,5,6,12,13,14]}
@@ -127,7 +127,7 @@ Def-Path Set
             du(14,16,n) = {[14,15,16]}
 
 
-__DU pairs per Variable:__
+#### __DU pairs per Variable:__
 
 | Variables  |  DU-Pairs  |
 | -------------- | --- |
@@ -139,7 +139,7 @@ __DU pairs per Variable:__
 | r2     |  (12,13), (12,14), (12,18) |
 | n   |  (7,8), (7,9), (14,15), (14,16)|
 
-__Pairs Covered per Test Case:__
+#### __Pairs Covered per Test Case:__
 
     -testCaluclateColumnTotalFiveValues()
         Input Values: [7.5, 2.5, 4, -4, 5], ColumnNumber [1]
@@ -185,7 +185,7 @@ __Pairs Covered per Test Case:__
         Input Values: [null], ColumnNumber [0]
         Pairs Covered: data(1,2)
 
-  __DU pair Coverage:__
+#### __DU pair Coverage:__
 
     Coverage = (number of exercised DU pairs) / (mumber of DU pairs) = 21 / 21 
              = 100%
