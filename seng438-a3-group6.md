@@ -211,17 +211,6 @@ method: getLength()
 
 #### __Pairs covered per test case:__
 
-testGetLengthPosPosNum() --> lower(78, 138) and upper(81,138)
-
-testGetLengthNegPosNum() --> lower(78, 138) and upper(81,138)
-
-testGetLengthNegNegNum() --> lower(78, 138) and upper(81,138)
-
-testGetLengthZeroZeroNum() --> lower(78, 138) and upper(81,138)
-
-testGetLengthZeroPosoNum() --> lower(78, 138) and upper(81,138)
-
-testGetLengthNegZeroNum() --> lower(78, 138) and upper(81,138)
 
 
 #### __DU pair Coverage:__
@@ -376,7 +365,21 @@ testGetLengthNegZeroNum() --> lower(78, 138) and upper(81,138)
 
 # 4 A high level description of five selected test cases you have designed using coverage information, and how they have increased code coverage
 
-Text…
+For class Range, this was our code coverage for branch coverage using the test sutie developed in assignment 2:
+
+<img width="500" alt="branch" src="https://user-images.githubusercontent.com/56771715/222769140-c0aaa564-ab41-4333-8d79-b582130c6368.png">
+
+As you can see, we were missing many methods that were not implemented in assignment 2. To increase the code coverage, we deicided to implement every single method in class Range. The updated code coverage for branch coverage for assignment 3 is: 
+
+<img width="500" alt="Screen Shot 2023-03-03 at 6 56 50 AM" src="https://user-images.githubusercontent.com/56771715/222754534-1ca4b98a-c33a-46aa-a266-a4e6183876c1.png">
+
+As we can see:
+     For method equals, these are the test cases created to go from 0% branch coverage to 100% branch coverage:
+     
+     <img width="500" alt="Screen Shot 2023-03-03 at 9 11 04 AM" src="https://user-images.githubusercontent.com/56771715/222770344-b670d5ee-5762-4d3e-9e1b-51099ed7adce.png">
+
+     
+          
 
 # 5 A detailed report of the coverage achieved of each class and method (a screen shot from the code cover results in green and red color would suffice)
 
