@@ -348,7 +348,7 @@ Text…
        
        Branch Coverage:
        
-<img width="500" alt="Screen Shot 2023-03-03 at 6 55 06 AM" src="https://user-images.githubusercontent.com/56771715/222753967-2fb16534-86ed-474d-ae18-213589768bb6.png">
+<img width="500" alt="Screen Shot 2023-03-03 at 6 56 50 AM" src="https://user-images.githubusercontent.com/56771715/222754534-1ca4b98a-c33a-46aa-a266-a4e6183876c1.png">
         
         Statement Coverage:
         
@@ -362,9 +362,8 @@ Text…
        For class DataUtilities:
        
        Branch Coverage:
-       
-<img width="500" alt="Screen Shot 2023-03-03 at 6 56 50 AM" src="https://user-images.githubusercontent.com/56771715/222754534-1ca4b98a-c33a-46aa-a266-a4e6183876c1.png">
 
+<img width="500" alt="Screen Shot 2023-03-03 at 6 55 06 AM" src="https://user-images.githubusercontent.com/56771715/222753967-2fb16534-86ed-474d-ae18-213589768bb6.png">
        
        Statement Coverage:
        
