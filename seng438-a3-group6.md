@@ -197,7 +197,7 @@ __Pairs Covered per Test Case:__
 
 # 3 A detailed description of the testing strategy for the new unit test
 
-__Range:__
+###__Range:__
 
         -constrain(double): double
         Sample Range(-1,1)
@@ -312,7 +312,7 @@ __Range:__
         -intersects(Range, range): boolean
         
         
-__DataUtilities:__
+###__DataUtilities:__
 
         -calculateRowTotal(Values2D data, int row, int[] validCols): double
             TC1: row = 0, validCols = {0, 1, 2},
