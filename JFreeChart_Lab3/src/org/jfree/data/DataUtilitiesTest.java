@@ -183,8 +183,6 @@ public class DataUtilitiesTest {
 					 e.getClass());
 		 }
 	 }
-	
-	// ------- Added Test for calculateColumnTotal(Values2D data, int column)
 	 
 	 /*
 	   *  This test will simulate when the input argument data holds a null value
@@ -198,19 +196,19 @@ public class DataUtilitiesTest {
 		         {
 		             one(values).getRowCount();
 		             will(returnValue(5));
-		             
+
 		             one(values).getValue(0, 0);
 		             will(returnValue(3.0));
-		             
+
 		             one(values).getValue(1, 0);
 		             will(returnValue(null));
-		             
+
 		             one(values).getValue(2, 0);
 		             will(returnValue(1.0));
-		             
+
 		             one(values).getValue(3, 0);
 		             will(returnValue(10.0));
-		             
+
 		             one(values).getValue(4, 0);
 		             will(returnValue(2.0));
 
@@ -220,8 +218,7 @@ public class DataUtilitiesTest {
 		     double expectedResult = 16.0;
 		     assertEquals("Checking function returns correct column sum",expectedResult, actualResult, .000000001d);
 		 }
-	  
-	  // ------- End of tests for calculateColumnTotal(Values2D data, int column) -------
+
 	 
 	 // ------- Test for createNumberArray(double[] data) -------
 	 
@@ -554,6 +551,7 @@ public class DataUtilitiesTest {
 	     // tear-down: NONE in this test method
 	 }
 	
+	 
 	 
 	 /**
 	  * This test calculates the total row amount with having 1 row and 3 columns all having values of zero
@@ -1270,6 +1268,7 @@ public class DataUtilitiesTest {
 		     assertEquals("Checking function returns correct column sum",expectedResult, actualResult, .000000001d);
 		 }
 	  
+	  
 	
 	  
 	// ------- End of tests for calculateColumnTotal(Values2D data, int column, int[] validRows): double -------	
@@ -1405,6 +1404,41 @@ public class DataUtilitiesTest {
 			             one(values).getValue(0, 3);
 			             will(returnValue(2));
 			  
+			             
+			         }
+			     });
+			     int[] validCols = {5};
+			     double result = DataUtilities.calculateRowTotal(values, 0, validCols);
+			     // verify
+			     assertEquals(result, 0, .000000001d);
+			 }
+			 
+			 /*
+			  * Testing this method with negative column
+			  * 
+			  */
+			 @Test(timeout = 1000) // timeout: 1000
+			 public void testCalculateRowTotalNegativeColumn() {
+			
+			     Mockery mockingContext = new Mockery();
+			     final Values2D values = mockingContext.mock(Values2D.class);
+			     mockingContext.checking(new Expectations() {
+			         {
+			        	 one(values).getColumnCount();
+			             will(returnValue(-1));
+			             
+//			             one(values).getValue(0, 0);
+//			             will(returnValue(4));
+//			             
+//			             one(values).getValue(0, 1);
+//			             will(returnValue(null));
+//			             
+//			             one(values).getValue(0, 2);
+//			             will(returnValue(-6));
+//			             
+//			             one(values).getValue(0, 3);
+//			             will(returnValue(2));
+//			  
 			             
 			         }
 			     });
