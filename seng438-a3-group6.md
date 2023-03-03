@@ -240,7 +240,7 @@ __Data Flow Graph:__
         -shiftWithNoZeroCrossing(double, double): double
             TC1 & TC2: This test will simulate when input Range of (lower bound + delta < 0) where lower bound > 0
                 Input Values: testRange = new Range(5, 10); Range.shift(testRange, -6);
-                Expected Output: Expected result: Range(0, UpperBound + delta)
+                Expected result: Range(0, UpperBound + delta)
             TC3 & TC4: This test will simulate when input Range of upper bound + delta > 0 when upper bound < 0
                 Input Values: testRange = new Range(-10, -5); Range.shift(testRange, 6);    
                 Expected result: Range(LowerBound + delta, 0)
