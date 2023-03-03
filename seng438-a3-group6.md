@@ -61,7 +61,7 @@ Text…
 	        TC2: Input: base = Range(-10,10), factor = -3.0
 	        TC3: Input: base = Range(-10,10), factor = 2.0
 
-               -shiftWithNoZeroCrossing(double, double): double
+        -shiftWithNoZeroCrossing(double, double): double
             TC1 & TC2: This test will simulate when input Range of (lower bound + delta < 0) where lower bound > 0
                 Input Values: testRange = new Range(5, 10); Range.shift(testRange, -6);
                 Expected Output: Expected result: Range(0, UpperBound + delta)
@@ -128,7 +128,7 @@ Text…
             TC5: This test will simulate when input ranges lower bound is NaN, upper bound is NaN
                 Input Values: testRange = new Range(NaN,NaN); testRange.isNaNRange();
                 Expected result: True 
-    
+
         -expand(Range, double, double): Range
         -expandToInclude(Range, double): Range
         -shift(Range, double): Range
