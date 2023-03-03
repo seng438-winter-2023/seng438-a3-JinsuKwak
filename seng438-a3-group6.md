@@ -193,6 +193,27 @@ __Data Flow Graph:__
 
 ## __Range:__
 
+method: getLength()
+
+#### __Data Flow Graph__:
+
+![Untitled Diagram (2)](https://user-images.githubusercontent.com/56771715/222766337-ab91bee6-be96-464e-94c2-5193699de73c.jpg)
+
+
+#### __DU pairs per Variable:__
+
+| Variables  |  DU-Pairs  |
+| -------------- | --- |
+| lower   |  (78, 133), (78, 134), (78, 138)  |
+| upper  |  (81, 133), (81, 135), (81, 138)   |
+| msg     |  (134, 136)  |
+
+
+#### __DU pair Coverage:__
+
+     Coverage = number of exercised DU pairs / number of DU pairs = 2/7 = 0.2857
+     So 28.57% DU-Pair coverage
+
 
 
 # 3 A detailed description of the testing strategy for the new unit test
@@ -305,61 +326,11 @@ __Data Flow Graph:__
                 Input Values: testRange = new Range(NaN,NaN); testRange.isNaNRange();
                 Expected result: True 
 
-          -expand(Range, double, double): Range
-               TC1: Input: base = Range(1,2),lowerMargin= 2, upperMargin= 0.5
-                    ExpectedOutput: Range is expanded to (-1,2.5)
-               TC2: Input: base = null, lowerMargin = 2, upperMargin = 0.5
-                    ExpectedOutput: InvalidParameterException is thrown
-               TC3: Input: base= Range(1,2), lowerMargin= -0.5, upperMargin=-0.5
-                    ExpectedOutput: Range is expanded to (1.5,1.5)
-               TC4: Input: base= Range(1,2), lowerMargin= 5, upperMargin= 2
-                    ExpectedOutput: Range is expanded to (-4,4)
-          -expandToInclude(Range, double): Range
-               TC1: Input: base = Range(1,2), value = 5
-                    ExpectedOutput: Range is expanded to (1,5)
-               TC2: Input: base= Range(1,2), value = 0
-                    ExpectedOutput: Range is expanded to (0,2)
-               TC3: Input: base = Range(1,2), value = -5
-                    ExpectedOutput: Range is expanded to (-5,2)
-               TC4: Input: base = null, value = 5
-                    ExpectedOutput: InvalidParameterException is thrown
-          -shift(Range, double): Range
-               TC1: Input: base = Range(1,2), delta = 5
-                    ExpectedOutput: Range is shifted to (6,7)
-               TC2: Input: base = Range(1,2), delta = -5
-                    ExpectedOutput: Range is shifted to (0,0)
-               TC3: Input: base = Range(-2,-1), delta = 5
-                    ExpectedOutput: Range is shifted to (0,0)
-               TC4: Input: base = Range(-2,-1), delta = -5
-                    ExpectedOutput: Range is shifted to (-7,-6)
-               TC5: Input: base = null, delta = 5
-                    ExpectedOutput: InvalidParameterException is thrown
-               TC6: Input: base = Range(1,2), delta = 500
-                    ExpectedOutput: Range is shifted to (501,502)
-               TC7: Input: base = Range(1,2), delta= 0.01
-                    ExpectedOutput: Range is shifted to (1.01,2.01)
-          -shift(Range, double, boolean): Range 
-               TC1: Input: base = Range(1,2), delta= 5, allowZeroCrossing=true
-                    ExpectedOutput: Range is shifted to (6,7)
-               TC2: Input: base = Range(1,2), delta= -5, allowZeroCrossing=true
-                    ExpectedOutput: Range is shifted to (-4,-3)
-               TC3: Input: base = Range(-10,-2), delta= 5, allowZeroCrossing=true
-                    ExpectedOutput: Range is shifted to (-5,3)
-               TC4: Input: base = null, delta= 5, allowZeroCrossing=true
-                    ExpectedOutput: InvalidParameterException is thrown
-          -intersects(Range range): boolean
-               TC1: Input: assumed = Range(5,15), = 5, test= Range(10.5,14.5)
-                    ExpectedOutput: True
-               TC2: Input: assumed = Range(5,15), = 5, test= Range(-5.2,4)
-                    ExpectedOutput: False
-               TC3: Input: assumed = Range(5,15), = 5, test= Range(14.5,20)
-                    ExpectedOutput: True
-               TC4: Input: assumed = Range(5,15), = 5, test= Range(-5.2,5.2)
-                    ExpectedOutput: True
-               TC5: Input: assumed = Range(5,15), = 5, test= Range(20,25)
-                    ExpectedOutput: True
-               TC6: Input: assumed = Range(5,15), = 5, test= null
-                    ExpectedOutput: InvalidParameterException is thrown
+        -expand(Range, double, double): Range
+        -expandToInclude(Range, double): Range
+        -shift(Range, double): Range
+        -shift(Range, double, boolean): Range
+        -intersects(Range, range): boolean
         
         
 ### __DataUtilities:__
@@ -426,9 +397,6 @@ Text…
 <img width="500" alt="Screen Shot 2023-03-03 at 6 54 54 AM" src="https://user-images.githubusercontent.com/56771715/222754610-8f3c13f1-0a90-48d2-b008-f0559ae32071.png">
 
 
-
-
-       
 
 # 6 Pros and Cons of coverage tools used and Metrics you report
 
