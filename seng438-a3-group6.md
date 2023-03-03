@@ -22,6 +22,7 @@ In this assignment, the goal was to use Eclipse IDE to perform unit testing on c
 ##  __DataUtilities:__
 
 __Data Flow Graph:__
+![SENG438LAB3](https://user-images.githubusercontent.com/91816397/222778118-1680e339-fab6-4347-ac40-658b7f724770.jpeg)
 
 #### __Def-Use Sets per Statement:__
  Def-Path Set
