@@ -183,6 +183,45 @@ public class DataUtilitiesTest {
 					 e.getClass());
 		 }
 	 }
+	
+	// ------- Added Test for calculateColumnTotal(Values2D data, int column)
+	 
+	 /*
+	   *  This test will simulate when the input argument data holds a null value
+	   *  Expected result: returns accurate column total
+	   */
+	  @Test(timeout = 1000) // timeout: 1000
+		 public void testCalculateColumnTotalNullValueInputData() {
+		     Mockery mockingContext = new Mockery();
+		     final Values2D values = mockingContext.mock(Values2D.class);
+		     mockingContext.checking(new Expectations() {
+		         {
+		             one(values).getRowCount();
+		             will(returnValue(5));
+		             
+		             one(values).getValue(0, 0);
+		             will(returnValue(3.0));
+		             
+		             one(values).getValue(1, 0);
+		             will(returnValue(null));
+		             
+		             one(values).getValue(2, 0);
+		             will(returnValue(1.0));
+		             
+		             one(values).getValue(3, 0);
+		             will(returnValue(10.0));
+		             
+		             one(values).getValue(4, 0);
+		             will(returnValue(2.0));
+
+		         }
+		     });
+		     double actualResult = DataUtilities.calculateColumnTotal(values, 0);
+		     double expectedResult = 16.0;
+		     assertEquals("Checking function returns correct column sum",expectedResult, actualResult, .000000001d);
+		 }
+	  
+	  // ------- End of tests for calculateColumnTotal(Values2D data, int column) -------
 	 
 	 // ------- Test for createNumberArray(double[] data) -------
 	 
