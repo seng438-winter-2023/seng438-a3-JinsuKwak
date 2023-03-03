@@ -1083,9 +1083,9 @@ public class RangeTest {
     @Test(timeout = 1000) // timeout: 1000
  	public void testExpandBaseNegative() {
      	Range RangeExpand = new Range(1,2);
-     	Range expanded = Range.expand(RangeExpand, -2, -0.5);
- 		assertEquals("The expected lower bound is 2", 2, expanded.getLowerBound(),.000000001d);
- 		assertEquals("The expected upper bound is 1", 1, expanded.getUpperBound(),.000000001d);
+     	Range expanded = Range.expand(RangeExpand, -0.5, -0.5);
+ 		assertEquals("The expected lower bound is 1.5", 1.5, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected upper bound is 1.5", 1.5, expanded.getUpperBound(),.000000001d);
  	}
     
  	/*
@@ -1096,7 +1096,7 @@ public class RangeTest {
  	public void testExpandBaseUpperSmallerThanLower() {
      	Range RangeExpand = new Range(1,2);
      	Range expanded = Range.expand(RangeExpand, 5, 2);
- 		assertEquals("The expected lower bound is -3", -3, expanded.getLowerBound(),.000000001d);
+ 		assertEquals("The expected lower bound is -4", -4, expanded.getLowerBound(),.000000001d);
  		assertEquals("The expected upper bound is 4", 4, expanded.getUpperBound(),.000000001d);
  	}
      	
