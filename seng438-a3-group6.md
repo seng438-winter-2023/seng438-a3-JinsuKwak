@@ -376,7 +376,7 @@ As you can see, we were missing many methods that were not implemented in assign
 As we can see:
      For method equals, these are the test cases created to go from 0% branch coverage to 100% branch coverage:
      
-     <img width="500" alt="Screen Shot 2023-03-03 at 9 11 04 AM" src="https://user-images.githubusercontent.com/56771715/222770344-b670d5ee-5762-4d3e-9e1b-51099ed7adce.png">
+<img width="500" alt="Screen Shot 2023-03-03 at 9 11 04 AM" src="https://user-images.githubusercontent.com/56771715/222770344-b670d5ee-5762-4d3e-9e1b-51099ed7adce.png">
 
      
           
