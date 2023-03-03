@@ -513,8 +513,8 @@ Section 3.3: Test Suite Development
 
 # 9 Any difficulties encountered, challenges overcome, and lessons learned from performing the lab
 
-Text…
+Some of the difficulties we initially faced were setting up the JUnit IDE with the new jar files but after that, it was smooth sailing. Overall, we learned more about designing and carrying out unit tests via JUnit and were able to gain more experience with white-box testing.
 
 # 10 Comments/feedback on the lab itself
 
-Text…
+The lab was well organized. 
