@@ -60,12 +60,75 @@ Text…
             TC1: Input: base = null, factor = 1.0
 	        TC2: Input: base = Range(-10,10), factor = -3.0
 	        TC3: Input: base = Range(-10,10), factor = 2.0
+
+               -shiftWithNoZeroCrossing(double, double): double
+            TC1 & TC2: This test will simulate when input Range of (lower bound + delta < 0) where lower bound > 0
+                Input Values: testRange = new Range(5, 10); Range.shift(testRange, -6);
+                Expected Output: Expected result: Range(0, UpperBound + delta)
+            TC3 & TC4: This test will simulate when input Range of upper bound + delta > 0 when upper bound < 0
+                Input Values: testRange = new Range(-10, -5); Range.shift(testRange, 6);    
+                Expected result: Range(LowerBound + delta, 0)
+            TC5 & TC6: This test will simulate when input Range at (0,0)
+                Input Values: testRange = new Range(0, 0); Range.shift(testRange, 6);
+                Expected result: Range(LowerBound + delta, UpperBound + delta)
 		
-        -shiftWithNoZeroCrossing(double, double): double
+
         -hashCode(): int
+            TC1: This test will simulate this method returns int type (not null value)
+                Input Values: testRange = new Range(-1, 1); testRange.hashCode()
+                Expected Output: an int type number
+
         -combineIgnoringNaN(Range range1, Range range2): Range
+            TC1: This test will simulate when input Range 1 is Null, Range 2 is not Null but NaN
+                Input Values: Range r1 = null; Range r2 = new Range (NaN, NaN); 
+                Expected result: null
+            TC2: This test will simulate when input Range 1 is Null, Range 2 is Null
+                Input Values: Range r1 = null; Range r2 = null; 
+                Expected result: null  
+            TC3: This test will simulate when input Range 1 is Null, Range 2 is Normal
+                Input Values: Range r1 = null;  Range r2 = new Range (-1,1);
+                Expected result: Range 2
+            TC4: This test will simulate when input Range 1 is notNull but NaN, Range 2 is null
+                Input Values: Range r1 = new Range (NaN, NaN); Range r2 = null;
+                Expected result: null
+            TC5: This test will simulate when input Range 1 is Normal, Range 2 is Null
+                Input Values: Range r1 = new Range (-1,1);  Range r2 = null;    
+                Expected result: Range 1
+            TC6: This test will simulate when input Range 1 is Null, Range 2 is Null
+                Input Values: Range r1 = new Range (NaN, NaN);  Range r2 = new Range (NaN, NaN); 
+                Expected result: null   
+            TC7: This test will simulate when input Range 1 is Normal, Range 2 is Normal
+                Input Values: Range r1 = new Range(-2 , 1); Range r2 = new Range(-1 , 2); 
+                Expected Values: Combined Range (Range r1 + Range r2)   
+
         -min(double d1, double d2): double
+            To test this function, we need to test another function that uses min
+            TC1: This test will simulate when input d1 is Normal, Range d2 is Normal
+                Input Values: double d1 = -20; double d2 = 10; Range.combineIgnoringNaN(r1, new Range(d1,d2));  
+                Expected result: min value should be set as new range
+            TC2: This test will simulate when input d1 is Normal, Range d2 is NaN
+                Input Values: double NaN = zero/zero;  double d2 = 10; 
+                              Range actualRange = Range.combineIgnoringNaN(r1, new Range(NaN,d2));  
+                Expected result: min value should be set as new range
+            TC3: This test will simulate when input d1 is NaN, Range d2 is Normal
+                Input Values: double NaN = zero/zero;  Range r1 = new Range(-10,10);
+                             Range.combineIgnoringNaN(r1, new Range(NaN,NaN));  
+                Expected result: Range 1
+
         -isNaNRange(): boolean
+            TC1: This test will simulate when input ranges lower bound is normal, upper bound is Normal
+                Input Values: testRange = new Range(-1,1); testRange.isNaNRange();
+                Expected result: False
+            TC2: This test will simulate when input ranges lower bound is NaN, upper bound is Normal
+                Input Values: testRange = new Range(NaN,1); testRange.isNaNRange();
+                Expected result: False
+            TC3: This test will simulate when input ranges lower bound is Normal, upper bound is NaN
+                Input Values: testRange = new Range(-1,NaN); testRange.isNaNRange();
+                Expected result: False
+            TC5: This test will simulate when input ranges lower bound is NaN, upper bound is NaN
+                Input Values: testRange = new Range(NaN,NaN); testRange.isNaNRange();
+                Expected result: True 
+    
         -expand(Range, double, double): Range
         -expandToInclude(Range, double): Range
         -shift(Range, double): Range
