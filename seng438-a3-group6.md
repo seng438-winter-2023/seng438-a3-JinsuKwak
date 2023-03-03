@@ -342,11 +342,67 @@ testGetLengthNegZeroNum() --> lower(78, 138) and upper(81, 138)
                 Input Values: testRange = new Range(NaN,NaN); testRange.isNaNRange();
                 Expected result: True 
 
-        -expand(Range, double, double): Range
-        -expandToInclude(Range, double): Range
-        -shift(Range, double): Range
-        -shift(Range, double, boolean): Range
-        -intersects(Range, range): boolean
+          -expand(Range, double, double): Range 
+               TC1: Input: base = Range(1,2),lowerMargin= 2, upperMargin= 0.5
+                    ExpectedOutput: Range is expanded to (-1,2.5)
+               TC2: Input: base = null, lowerMargin = 2, upperMargin = 0.5
+                    ExpectedOutput: InvalidParameterException is thrown
+               TC3: Input: base= Range(1,2), lowerMargin= -0.5, upperMargin=-0.5
+                    ExpectedOutput: Range is expanded to (1.5,1.5)
+               TC4: Input: base= Range(1,2), lowerMargin= 5, upperMargin= 2
+                    ExpectedOutput: Range is expanded to (-4,4)
+               TC5: Input: base= Range(1,2), lowerMargin= -2, upperMargin= 0.5
+                    ExpectedOutput: Range is expanded to (2.25,3)		
+          -expandToInclude(Range, double): Range 
+               TC1: Input: base = Range(1,2), value = 5
+                    ExpectedOutput: Range is expanded to (1,5)
+               TC2: Input: base= Range(1,2), value = 0
+                    ExpectedOutput: Range is expanded to (0,2)
+               TC3: Input: base = Range(1,2), value = -5
+                    ExpectedOutput: Range is expanded to (-5,2)
+               TC4: Input: base = null, value = 5
+                    ExpectedOutput: InvalidParameterException is thrown
+               TC5: Input: base= Range(1,5), value = 3 
+                         ExpectedOutput: Range is unchanged at (1,5)		
+          -shift(Range, double): Range 
+               TC1: Input: base = Range(1,2), delta = 5
+                    ExpectedOutput: Range is shifted to (6,7)
+               TC2: Input: base = Range(1,2), delta = -5
+                    ExpectedOutput: Range is shifted to (0,0)
+               TC3: Input: base = Range(-2,-1), delta = 5
+                    ExpectedOutput: Range is shifted to (0,0)
+               TC4: Input: base = Range(-2,-1), delta = -5
+                    ExpectedOutput: Range is shifted to (-7,-6)
+               TC5: Input: base = null, delta = 5
+                    ExpectedOutput: InvalidParameterException is thrown
+               TC6: Input: base = Range(1,2), delta = 500
+                    ExpectedOutput: Range is shifted to (501,502)
+               TC7: Input: base = Range(1,2), delta= 0.01
+                    ExpectedOutput: Range is shifted to (1.01,2.01)
+
+          -shift(Range, double, boolean): Range 
+               TC1: Input: base = Range(1,2), delta= 5, allowZeroCrossing=true
+                    ExpectedOutput: Range is shifted to (6,7)
+               TC2: Input: base = Range(1,2), delta= -5, allowZeroCrossing=true
+                    ExpectedOutput: Range is shifted to (-4,-3)
+               TC3: Input: base = Range(-10,-2), delta= 5, allowZeroCrossing=true
+                    ExpectedOutput: Range is shifted to (-5,3)
+               TC4: Input: base = null, delta= 5, allowZeroCrossing=true
+                    ExpectedOutput: InvalidParameterException is thrown
+          -intersects(Range range): boolean 
+               TC1: Input: assumed = Range(5,15), = 5, test= Range(10.5,14.5)
+                    ExpectedOutput: True
+               TC2: Input: assumed = Range(5,15), = 5, test= Range(-5.2,4)
+                    ExpectedOutput: False
+                    TC3: Input: assumed = Range(5,15), = 5, test= Range(14.5,20)
+                    ExpectedOutput: True
+               TC4: Input: assumed = Range(5,15), = 5, test= Range(-5.2,5.2)
+                    ExpectedOutput: True
+               TC5: Input: assumed = Range(5,15), = 5, test= Range(20,25)
+                    ExpectedOutput: True
+               TC6: Input: assumed = Range(5,15), = 5, test= null
+                    ExpectedOutput: InvalidParameterException is thrown
+
         
         
 ### __DataUtilities:__
