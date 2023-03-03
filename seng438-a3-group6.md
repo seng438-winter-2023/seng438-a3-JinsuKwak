@@ -212,10 +212,15 @@ method: getLength()
 #### __Pairs covered per test case:__
 
 testGetLengthPosPosNum() --> lower(78, 138) and upper(81,138)
+
 testGetLengthNegPosNum() --> lower(78, 138) and upper(81,138)
+
 testGetLengthNegNegNum() --> lower(78, 138) and upper(81,138)
+
 testGetLengthZeroZeroNum() --> lower(78, 138) and upper(81,138)
+
 testGetLengthZeroPosoNum() --> lower(78, 138) and upper(81,138)
+
 testGetLengthNegZeroNum() --> lower(78, 138) and upper(81,138)
 
 
