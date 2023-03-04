@@ -576,4 +576,4 @@ Some of the difficulties we initially faced were setting up the JUnit IDE with t
 
 # 10 Comments/feedback on the lab itself
 
-The lab was well organized. 
+Some of the lab instructions were not completely clear at first, especially with the jar files. The lab was well organized. We found the lab to be quite interesting and important to improve our understanding of test cases, as well as give us some experience with whitebox-testing and coverage.
