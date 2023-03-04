@@ -572,8 +572,8 @@ Section 3.3: Test Suite Development
 
 # 9 Any difficulties encountered, challenges overcome, and lessons learned from performing the lab
 
-Some of the difficulties we initially faced were setting up the JUnit IDE with the new jar files but after that, it was smooth sailing. Overall, we learned more about designing and carrying out unit tests via JUnit and were able to gain more experience with white-box testing.
+Some of the difficulties we initially faced were setting up the JUnit IDE with the new jar files. We had some errors pop up due to the library_hamcrest_1.1.jar missing from the provided files, which we had to spend some time to figure out. Another part we had some issues with was getting the line coverage of the DataUtilities class beyond 90%, due to some unreachable code. Other than that, it was smooth sailing for the most part. Overall, we learned more about designing and carrying out unit tests via JUnit and were able to gain more experience with white-box testing.
 
 # 10 Comments/feedback on the lab itself
 
-Some of the lab instructions were not completely clear at first, especially with the jar files. The lab was well organized. We found the lab to be quite interesting and important to improve our understanding of test cases, as well as give us some experience with whitebox-testing and coverage.
+Some of the lab instructions were not completely clear at first, especially with the jar files. The lab was well organized. We found the lab to be quite interesting and important to improve our understanding of test cases, and it gave us some much needed experience with whitebox-testing and coverage with some tools such as EclEmma.
