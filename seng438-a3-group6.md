@@ -486,6 +486,7 @@ As we can see:
 
 # 6 Pros and Cons of coverage tools used and Metrics you report
 We used EclEmma, which is an built-in feature of Eclipse. We were able to use EclEmma to analyze the coverage provided by our test cases.The coverage information provided by this tool was valuable in assessing the effectiveness of our test cases.
+
 Advantages of using EclEmma include its user-friendly interface and fast performance. It provides clear visual cues by displaying red and green lines to indicate covered and uncovered statements, respectively, and also reports the total number of covered lines. It is highly effective for assessing statement coverage.
 However, EclEmma lacks support for condition coverage, which means that other tools would need to be used to achieve this type of coverage.
 
